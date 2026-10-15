@@ -7,6 +7,8 @@ first.
 **[⬇ Download the latest version](https://github.com/vEditor-cmyk/vEditor/releases/latest)** — Windows, free ·
 [what is new](CHANGELOG.md) · [how to install](#download-and-install)
 
+<a href="https://buymeacoffee.com/veditor"><img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=veditor&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" height="40"></a>
+
 ![The Timecycle Editor: the game's world under the timecycle being edited](showcase/images/timecycle-editor.png)
 
 vEditor is made for convenience: the everyday jobs of a FiveM server in one program instead of a handful.
@@ -14,7 +16,8 @@ I will keep adding tools as far as I can.
 
 - **Free.** Everything in vEditor is free to use. The one exception is AI: vEditor sells no AI of its own — it
   asks the AI service you choose, on your own subscription or API key, and that service bills you. Every AI
-  feature is optional; the rest of the program works without it.
+  feature is optional; the rest of the program works without it. If vEditor saves you time and you would like to
+  support it, you can [buy me a coffee](https://buymeacoffee.com/veditor) — never needed, always appreciated.
 - **Private.** vEditor does not collect anything about you and sends nothing to a server of mine: no account, no
   telemetry. It goes online only for these:
   - the **update check** — once at start, it asks GitHub for the latest release on this page and nothing else (no
