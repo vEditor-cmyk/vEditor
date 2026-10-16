@@ -73,7 +73,10 @@ Pictures are with the tools below: [Vehicle Tool](#vehicle-tool) (sirens, siren 
   `.rpf` archives are entered like folders. Grid / List / Columns, a colour per file type, search through
   everything below a folder (archives included), filters by type. New Folder, Import, Rename, Delete and Export
   work on disk and inside archives; drop files in from Explorer. Right-click also makes a **new animation
-  (`.ycd`)** or an empty **texture dictionary (`.ytd`)** in the folder on show and opens it.
+  (`.ycd`)** or an empty **texture dictionary (`.ytd`)** in the folder on show and opens it. The folders of the
+  path above the list have the same right-click menu as the folders themselves.
+- **Reload Map** — right-click a resource: its files are read again from the disk and the World shows them as they
+  are now (a map you changed in another tool), without loading the whole world again.
 - **RPF Explorer** — open or create an `.rpf` (a mod's `dlc.rpf`, for example), import and export files and
   whole folders, nested archives, rename, delete, *Defragment*. Textures inside an archive can be edited and
   saved back in place.
@@ -88,6 +91,10 @@ Pictures are with the tools below: [Vehicle Tool](#vehicle-tool) (sirens, siren 
 - **Import XML** — `x.ydr.xml` → `x.ydr` (and so on): *Import XML Here* on selected XML files, *Import XML…* into
   the folder or archive on show, or *File → Import XML…*. Double-click an XML of CodeWalker's to look at what it
   makes, without keeping it.
+- **Code (XML)** — right-click a `.ymap`, `.ytyp`, `.ymt`, `.ymf`, `.ynd` … → *Edit Code (XML)*: the file's XML in a
+  tab of its own (line numbers, find, go to line) to read and change. *Save* turns it back into the file and writes
+  it — the file as it came is kept in the resource's `.veditor_backup` folder the first time; XML CodeWalker cannot
+  read is shown at its line and nothing is written. A file inside an archive is written back into the archive.
 - The work is done by **CodeWalker's own library, from the CodeWalker installed on your computer** (found by
   itself, or *Settings → CodeWalker Folder…*), so the XML is exactly CodeWalker's. vEditor does not come with
   CodeWalker: its source is released for educational purposes only, without a licence to pass it on. Shader and
@@ -165,6 +172,10 @@ A picture editor laid out and driven like Photoshop, in a window of its own (*To
   the layout as a guide (*Edit in Image Editor*), export the layout to paint over it elsewhere, import a
   picture, or have an AI model make one (see [AI](#ai-optional)). *Replace* writes it into the `.ytd` the texture
   is in (a copy of the file as it was is kept, outside the stream folder); *Add as New Livery* adds the next one.
+- **Collision viewer** — double-click a `.ybn`: its collision in 3D, coloured by material (as CodeWalker colours
+  them) or by part; the Details panel lists what it is made of — its bounds with their flags, its polygons, its
+  materials — with a box to hide each material or part. *Show in World* takes the World's camera there (to where
+  the interior is placed, for an interior's collision).
 
 ### World and Map Editor
 
@@ -190,12 +201,32 @@ A picture editor laid out and driven like Photoshop, in a window of its own (*To
   opens all of its ymaps and takes the camera there. Move, turn or delete its objects and add props; *Save* writes
   back only the ymaps that changed, in place (new props go into `<resource>_veditor.ymap`). **Back Up…** copies the
   map to a folder you choose, **Restore…** puts a backup back, **Only This Map** hides the rest of the world.
+- **Map Files** — beside the selection, the Details panel has what the map's resource is made of: its ymaps (with
+  how many objects each holds), its `.ytyp` files — every archetype, interior, room, portal and entity in them,
+  edited right there in a form below the list — its collision, models and textures. Double-click an interior or
+  a door to edit it in the World, a ymap to list its objects, a model or collision file to open it. *Archetype
+  in ….ytyp* on a picked object goes to its archetype.
+- **The Outliner** lists the map's objects by the ymap they are kept in (one ymap or all of them, sorted by any
+  column); its right-click menu goes to an object, moves, turns, scales, drops, copies or deletes it.
 - **Interiors (MLO)** — an interior placed by the map is one object: click a room and the whole interior is
   picked, moved with the handle and turned about its up axis, its rooms, portals and own collision going with it.
-  An interior is not scaled, and one room of it is not moved on its own.
+- **Inside an interior** — what an interior is made of (doors, furniture, walls) is in its `.ytyp`, not in the
+  ymap. *Edit Interior (ytyp)…* (on an interior picked in a map, in the Outliner, or on any object of an interior
+  clicked in the World) opens it where the map places it: its entities are moved, turned, deleted, copied or placed
+  with the gizmo, listed by room — doors are most often on the portals. *Save* writes the `.ytyp` in place, by
+  CodeWalker's rules for an interior's lists; every place the interior stands shows the change.
+- **`.ytyp` files** open in a tab of their own too: the archetypes, an interior's rooms, portals, entity sets and
+  timecycle modifiers, and the form of what is picked — names, distances, flags (as named boxes), a time
+  archetype's hours, an entity's place, turn, scale and room. Delete, copy, add an entity to a room, undo.
+- **Make a Model of This Size…** — the game draws an interior's entity at its model's own size, whatever scale it
+  is given. This makes a copy of the model at the size you set — its collision too, by your CodeWalker — adds its
+  archetype to the `.ytyp` and gives the entity that model at scale 1.
+- **Props and your game build** — every prop knows the game build it came with. The prop list leaves out (or marks
+  in orange) props newer than your server's build (`sv_enforceGameBuild`, or the build chosen under *Map ▾*);
+  placing one, or saving a map that has one, tells you that players on that build will not see it.
 - Not done yet: collision (`.ybn`) laid out in world space does not follow a moved object or interior, and the
   map's far (LOD) models are not rebuilt — a moved object's far model stays where it was. Not tried in game by
-  vEditor itself: every ymap it wrote was read back by CodeWalker's library.
+  vEditor itself: every ymap and `.ytyp` it wrote was read back by CodeWalker's library.
 - **Traffic paths** — *🛣 Paths* (Shift+3, or *Tools → Traffic Paths*): the roads the game's traffic drives on
   (the `.ynd` path nodes of the game and of your resources), drawn over the world — green two-way, orange one-way,
   red where the game makes no traffic, every lane a line of its own with arrows the way it goes (as CodeWalker draws
