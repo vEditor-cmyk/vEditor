@@ -3,6 +3,42 @@
 What is new in each version of vEditor. Downloads are on the [releases page](https://github.com/vEditor-cmyk/vEditor/releases);
 vEditor tells you when a newer version is out (*Help → Check for Updates* looks at once).
 
+## 1.2.0 — 2026-10-17
+
+Weapon skins — see the [README](README.md#weapon-tool) and the [video](README.md#showcase).
+
+- **Add Skin** (Weapon Tool → *Components*, or *Add Weapon ▾ → Skin for a Game Weapon…*) — a finish made the way
+  the game makes its own (the Pistol .50's Platinum Pearl Deluxe): while it is on, the weapon and the clips,
+  suppressors, flashlights and scopes you tick show copies of their models with textures of their own. No polygons
+  added, no new weapon: the skin is one of the weapon's components.
+- **A pattern, a colour, or a skin pack's texture as it is** — a picture repeated over the weapon or laid once over
+  each side, keeping as much of the weapon's own shading as you like; or a texture made for the weapon put in
+  unchanged (a `.dds` keeps its own data; several files at once, each on the texture it is named after).
+- **Every texture its own choice** — the skin's, a file of yours (a clip can have its own), or unchanged; a 3D
+  preview, the texture flat with its UV lines, *Save UV Layout…*.
+- **Edit Skin** shows the skin as it is — its textures, kept unless you change one, and the choices it was made with
+  (saved in the resource's `.veditor` folder).
+- **Folders** — each skin's files in `stream/skin01`, `skin02` …, the weapon's own in `stream/default`.
+- **One set of skins for several weapons** — select components (Ctrl / Shift), *Copy* / *Paste* them on another
+  weapon or *Copy to Weapons…*: weapons of the same model wear the same skins, nothing is copied on disk.
+  *Add Components…* lists the resource's own components beside the game's and takes several at once.
+- **Ten skins to an attach point** — seen in game: from the 11th skin of one attach point on, the gun changed but
+  its clip and suppressor did not. More skins go on further `gun_root` points; saving a resource that has more on
+  one point lays them out again.
+- **Attach points that share a bone stay apart** — saving a weapon used to merge them into one (the game's AP pistol
+  has two on `gun_root`).
+- **Textures the game can load** — Direct3D 11 refuses a compressed texture whose sides are not multiples of 4 (a
+  2844 texture halved to 1422 — in game the model flickers). Optimize, imports and the Weapon Tool now put every
+  compressed texture on the 4-pixel grid (1422 → 1424); the Weapon Tool's check marks such textures in a resource.
+- **`.ytd` files in smaller pieces of memory** — textures packed into pages the way CodeWalker packs them, instead of
+  one block rounded up to the next power of two (a 11 MB skin dictionary went from one 16 MiB piece to 10–12 MiB).
+- **Weapon Tool check** — also marks more than ten skins on one attach point, and a component another resource
+  defines (that resource has to start first).
+- **Test command** — `/give_<resource> COMPONENT_…` gives you the skin's weapon with that skin on; `INSTALL.md` lists
+  the skins with their files.
+- Skins made with this version were seen in game on one server (a Kriss Vector, a Combat Pistol); the files were
+  also read back by CodeWalker's library.
+
 ## 1.1.0 — 2026-10-16
 
 Maps and interiors, edited where they are — see the [README](README.md#world-and-map-editor).

@@ -31,6 +31,12 @@ I will keep adding tools as far as I can.
 
 ## Showcase
 
+**Add a skin to a weapon** — Weapon Tool → *Components → Add Skin…*: a skin pack's texture made for the Kriss
+Vector (a `.dds`) is chosen, seen on the gun in 3D before anything is written, and put in as it is. The skin becomes
+one of the weapon's components, the way the game's own finishes are made — no extra polygons, no new weapon.
+
+[![Add a skin to a weapon](showcase/previews/add-weapon-livery.webp)](showcase/videos/add-weapon-livery.mp4)
+
 **Generate a shirt texture with AI** — Cloth Tool → UV page: a request ("USA Shirt") is drawn onto the garment's
 UV layout, added as a new texture and worn by the character.
 
@@ -113,7 +119,12 @@ Pictures are with the tools below: [Vehicle Tool](#vehicle-tool) (sirens, siren 
   accidental DXT1 for a texture with transparency). BC4 / BC5 / BC7 textures are read and shown, but vEditor has
   no encoder for them yet.
 - **Smaller files, not only smaller textures** — saving a `.ydr` / `.yft` rebuilds its graphics segment to fit the
-  textures it holds now, so the file and the memory figure the server reports really go down.
+  textures it holds now, so the file and the memory figure the server reports really go down. A `.ytd` is written
+  with its textures packed into memory pages the way CodeWalker packs them, not in one large block.
+- **Sizes the game can load** — Direct3D 11 refuses a compressed texture whose sides are not multiples of 4 (a 2844
+  texture halved to 1422), and in game the model then flickers with another texture. Optimize, imports and the
+  Weapon Tool put every compressed texture on the 4-pixel grid (1422 → 1424). A `.dds` vEditor cannot encode again
+  (BC4 / BC5 / BC7) at such a size is refused, with the size to save it at.
 - **Texture Batch (Folder)** — every texture of every `.ytd` / `.ydr` / `.yft` below a folder in one list; filter
   by name, size or format, then convert all or a selection, over the originals (with `.bak`) or into a new folder.
 - **AI…** on any texture — see [AI](#ai-optional).
@@ -350,18 +361,41 @@ Three tools, each a tab of its own under *Tools*:
   (damage, headshot and player-vs-player multipliers, fall-off, clip size, fire rate, range, accuracy, recoil,
   the weapon wheel's bars) with the game's value beside every one that differs; **Flags** (every `WeaponFlags`
   value of the game, grouped, with the game weapons that have it); **Components** (keep the game's, make a copy of
-  one's own with its own name, model and clip size, add one of the game's); **Animations** and movement taken from
-  any game weapon; and the whole `CWeaponInfo` as XML.
+  one's own with its own name, model and clip size, add components — the game's or the resource's own, several at
+  once); **Animations** and movement taken from any game weapon; and the whole `CWeaponInfo` as XML.
+- **Skins** (*Components → Add Skin…*, or *Add Weapon ▾ → Skin for a Game Weapon…*) — a finish made the way the
+  game makes its own, like the Pistol .50's Platinum Pearl Deluxe: while it is on, the weapon and, as you tick them,
+  its clips, suppressors, flashlights and scopes show copies of their models with textures of their own. No polygons
+  are added and no new weapon is needed — the skin is one of the weapon's components.
+  - **The look** — a picture repeated over the weapon or laid once over each side, or one colour; how much of the
+    weapon's own shading stays; its decals kept or taken off. Or a skin pack's texture made for the weapon, put in
+    **as it is** (a `.dds` keeps its own data; several files at once, each on the texture it is named after).
+  - **Every texture its own choice** — the skin's picture, a file of yours (a clip can have its own even when it
+    shares the gun's texture name), or unchanged. A 3D preview of the weapon and of each part, the texture laid flat
+    with its UV lines, and *Save UV Layout…* to paint one of your own.
+  - **Edit Skin…** opens a skin as it is: its textures shown and kept unless you change one, with the choices it was
+    made with (kept in the resource's `.veditor` folder, which players never download).
+  - **Files** — each skin in `stream/skin01`, `skin02` …, the weapon's own files in `stream/default`. Ten skins go on
+    one attach point and more on further `gun_root` points (seen in game: from the 11th skin of a point on, the gun
+    changed but its clip and suppressor did not).
+- **One set of skins for several weapons** — weapons with the same model can wear the same skins: select components
+  (Ctrl / Shift), *Copy* and *Paste* them on another weapon (Ctrl+C / Ctrl+V), or *Copy to Weapons…* for several at
+  once. Nothing is copied on disk. vEditor tells you when a skin was made from another model, or when the weapon's
+  clip is one the skin has no look for.
 - **The server's weapon resources** are listed and open in the same editor — those made by other tools too.
   The check marks what would go wrong in game: a component named like one of the game's (it changes every weapon
   that has it), a model named like one of the game's, two resources with the same weapon or component, a weapon with
-  no animations, a template newer than the server's game build, files over FiveM's limits.
+  no animations, a template newer than the server's game build, files over FiveM's limits, textures the game cannot
+  load (see [Textures](#textures)), more than ten skins on one attach point, a component that another resource
+  defines (that resource has to start first).
 - **Save** writes `fxmanifest.lua`, the metas (`weapons`, `weaponcomponents`, `weaponarchetypes`,
   `weaponanimations`, `pedpersonality`), `cl_weaponNames.lua`, the `stream` folder and an `INSTALL.md` with the
-  hashes and entries for ox_inventory / qb-core / ESX. What is replaced is copied to `.veditor_backup` in the
-  resource first. *Test Command* adds `/give_<resource>` for admins (an ace).
+  hashes and entries for ox_inventory / qb-core / ESX, and a table of the skins with their files. What is replaced
+  is copied to `.veditor_backup` in the resource first. *Test Command* adds `/give_<resource>` for admins (an ace) —
+  `/give_<resource> COMPONENT_…` gives you the skin's weapon with that skin on.
 - Not tried in game by vEditor itself: the layout follows the game's own DLC weapon files and the add-on weapon
-  resources that run on FiveM servers.
+  resources that run on FiveM servers. Skins made with it have been seen in game on one server (a Kriss Vector, a
+  Combat Pistol).
 
 ### Vehicle Tool
 
