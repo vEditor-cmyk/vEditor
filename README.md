@@ -1,8 +1,8 @@
 # vEditor
 
-**One window for GTA V / FiveM assets** — textures, models, the map and its traffic paths, timecycles,
-animations, clothing, tattoos, weapons and vehicles — reading the game's own files directly, with no extracting
-first.
+**One window for GTA V / FiveM assets** — textures, models, props of your own, the map and its traffic paths,
+timecycles, animations, clothing, tattoos, weapons and vehicles — reading the game's own files directly, with no
+extracting first.
 
 **[⬇ Download the latest version](https://github.com/vEditor-cmyk/vEditor/releases/latest)** — Windows, free ·
 [what is new](CHANGELOG.md) · [how to install](#download-and-install)
@@ -86,6 +86,11 @@ Pictures are with the tools below: [Vehicle Tool](#vehicle-tool) (sirens, siren 
 - **RPF Explorer** — open or create an `.rpf` (a mod's `dlc.rpf`, for example), import and export files and
   whole folders, nested archives, rename, delete, *Defragment*. Textures inside an archive can be edited and
   saved back in place.
+- **Text files in a code editor** — `.lua`, `.meta`, `.xml`, `.json`, `server.cfg` and other text files open in a
+  tab of their own (double-click, or right-click → *Open as Text*), coloured as in VS Code: folding, find and
+  replace (with regular expressions), comment out (Ctrl+/), copy and move lines (Ctrl+D, Alt+↑ / ↓), matching
+  brackets and tags, zoom (Ctrl+wheel). *Ctrl+S* saves — the file's encoding and line endings kept, a copy of it as
+  it was in the resource's `.veditor_backup` the first time; a file inside an archive goes back into the archive.
 
 ### XML, as CodeWalker makes it
 
@@ -98,7 +103,8 @@ Pictures are with the tools below: [Vehicle Tool](#vehicle-tool) (sirens, siren 
   the folder or archive on show, or *File → Import XML…*. Double-click an XML of CodeWalker's to look at what it
   makes, without keeping it.
 - **Code (XML)** — right-click a `.ymap`, `.ytyp`, `.ymt`, `.ymf`, `.ynd` … → *Edit Code (XML)*: the file's XML in a
-  tab of its own (line numbers, find, go to line) to read and change. *Save* turns it back into the file and writes
+  tab of its own (the same code editor, with line numbers, folding, find, go to line) to read and change. *Save*
+  turns it back into the file and writes
   it — the file as it came is kept in the resource's `.veditor_backup` folder the first time; XML CodeWalker cannot
   read is shown at its line and nothing is written. A file inside an archive is written back into the archive.
 - The work is done by **CodeWalker's own library, from the CodeWalker installed on your computer** (found by
@@ -235,6 +241,22 @@ A picture editor laid out and driven like Photoshop, in a window of its own (*To
 - **Props and your game build** — every prop knows the game build it came with. The prop list leaves out (or marks
   in orange) props newer than your server's build (`sv_enforceGameBuild`, or the build chosen under *Map ▾*);
   placing one, or saving a map that has one, tells you that players on that build will not see it.
+- **Manifest (.ymf)** — *Tools → Manifest (.ymf)…*, right-click a resource, *Manifest…* in *Map Files*, or
+  double-click a `.ymf`: the `_manifest.ymf` an MLO needs, made from the resource's own files — which `.ytyp` files
+  each ymap needs, the interiors and their collision — ticked in a list before anything is written (an existing
+  manifest's other entries are kept). The file is the same, byte for byte, as CodeWalker makes from the same XML. A
+  resource of copied game ymaps that use no `.ytyp` of their own needs no manifest, and is told so (*Take the .ymf
+  Out*).
+- **Night lights** — *💡 Lights* in the World's bar: the city as it is lit at night — windows and signs that glow,
+  street lamps lighting what is around them, and the far lights of buildings (the game's LOD lights), each at the
+  hours the game switches it on (with *☀ Timecycle*, the hour on its timeline). Click a light to see which object it
+  belongs to and which files it comes from; *Delete Light* (or the Delete key) takes it out.
+- **Remove from Game…** — on a building or an interior of the game's map: it is taken out with its far (LOD)
+  models, the parts named after it (`…_dtl`, `…_ladder`) and its lights — ticked in a list first, shown at once,
+  undone with Ctrl+Z. *🗑 Removed → Save Removals* writes the changed ymaps and light files into a resource of their
+  own, `veditor_removed` (add `ensure veditor_removed` to `server.cfg`); a resource's own map is changed in place,
+  with a backup. Not done yet: the building's collision stays, and a far model it shares with other buildings
+  still shows it from afar.
 - Not done yet: collision (`.ybn`) laid out in world space does not follow a moved object or interior, and the
   map's far (LOD) models are not rebuilt — a moved object's far model stays where it was. Not tried in game by
   vEditor itself: every ymap and `.ytyp` it wrote was read back by CodeWalker's library.
@@ -263,17 +285,24 @@ A picture editor laid out and driven like Photoshop, in a window of its own (*To
     camera — blue where it is pavement (deeper: more pedestrians), green where peds are made off the pavement, grey
     road, purple interior. Drag to make ground pavement (pedestrians walk about there and are made there, at the
     density chosen, 0 … 7 — the game's own pavements have 1, 3 or 5), Shift+drag to take it away; roads, water and
-    steep ground are left alone unless asked. A click on a polygon with *Select* shows all its flags to set by hand.
+    steep ground are left alone unless asked. The brush paints where the ground is (not a treetop or a roof under
+    the pointer) and leaves alone polygons that float above it — where a map of your own lowered the ground, the
+    game's navmesh is still at the old height. A click on a polygon with *Select* shows all its flags to set by hand.
     The navmesh files (`navmesh[x][y].ynv`, 150 × 150 m each) are saved with the paths, written as they were with
     only the polygons' flags changed — of the game build chosen under *Map ▾*, so choose your server's build first
-    (DLC packs change the navmesh). It changes where the existing navmesh lets pedestrians walk; ground the navmesh
-    has no polygons on (a new floor of a map of your own) is not made yet.
+    (DLC packs change the navmesh).
+  - **🧱 Rebuild Navmesh** (4) — for ground the game's navmesh does not fit: a map of your own where buildings were
+    taken away and the ground laid flat, a new floor. Drag a box over it; the navmesh between the heights you set is
+    made anew from the collision there (how steep, how high a step, how much room above, how far from walls) and
+    joined to the navmesh around the box, which is cut to meet it. Saved with the paths, the whole file written
+    again. Seen in game: a script's pet that stopped at the edge of such a plaza walked onto it after the rebuild,
+    and pedestrians walk there too. The props on it are not cut out of the navmesh.
   - A path file takes the place of the game's whole area. Two resources that stream the same file are marked —
     FiveM uses only one of them. Cayo Perico's own path files are on a switch (*Paths ▾*).
   - Not tried in game by vEditor itself: every path file of the game, read and written again by vEditor, holds the
     same nodes, links and junctions, and CodeWalker reads vEditor's files as it reads the game's (a navmesh file
-    vEditor wrote differs from the game's only in the flags changed). Not in it yet: navmesh made new for ground
-    that has none, and the heightmaps of new junctions.
+    vEditor wrote differs from the game's only in the flags changed, unless it was rebuilt). Not in it yet: the
+    heightmaps of new junctions.
 
 ### Timecycle Editor
 
@@ -332,12 +361,24 @@ Three tools, each a tab of its own under *Tools*:
 - **Your clothing packs as the game sees them** — the server's packs in `server.cfg` order (or a standalone
   folder), what is in each, and **the number every item has in game**. *Check…* measures the packs against the
   limits of the game build you choose; *Calculate VRAM* estimates the video memory items take when worn; files
-  over FiveM's streaming limits are marked blue / yellow / red.
+  over FiveM's streaming limits are marked blue / yellow / red. Male items are blue and female ones pink, in the
+  list, the packs and the number map.
 - **Edit Mode** works on the pack's folder itself — no project file, no build step: *New DLC…*,
   *Add Models* (your own files, or **From the Game** — any of the game's clothes, male and female), delete, reorder,
   move to another pack.
 - **Per item** — name, component / prop type, behaviour flags, audio preset, first-person model, mesh physics
   (`.yld`), hoodie hairs, and Shop Meta (restriction tags, shop).
+- **Change Type moves the model** — an item made a prop (horns made as an accessory, turned into a hat) or a prop
+  made a component: the model is put onto the bone the new type hangs from and given the shaders the game draws
+  that type with; see-through and cut-out parts stay so. *Fit Model to the Hat* (or the type it is) does the same for
+  a prop whose type was changed without it. Seen in game: a converted hat shows on the head.
+- **The other character** — *Copy to Male / Female…* or *Move to …* (right-click, or the item's Details): the item
+  with its textures and settings goes into that character's collection of the pack, which is made if there is none.
+  The two characters share one skeleton, so the model moves the same on both; the bodies differ, so a tight top
+  may need fitting.
+- **The same model twice?** — adding models (your files, the game's clothes, copies) tells you when one is already
+  in the pack (the same shape, whatever the file is called) or in another pack (the very same file), with its number
+  in game: add it anyway, skip those, or cancel.
 - **Textures** — import, replace, export, optimize and delete the variations of an item and the textures embedded
   in its model; a preview of the item on the whole character with the rest of an outfit.
 - **UV page** — the item's UV layout beside the 3D model: import or export the picture, export the layout, or have
@@ -362,7 +403,18 @@ Three tools, each a tab of its own under *Tools*:
   the weapon wheel's bars) with the game's value beside every one that differs; **Flags** (every `WeaponFlags`
   value of the game, grouped, with the game weapons that have it); **Components** (keep the game's, make a copy of
   one's own with its own name, model and clip size, add components — the game's or the resource's own, several at
-  once); **Animations** and movement taken from any game weapon; and the whole `CWeaponInfo` as XML.
+  once); **Animations** and movement taken from any game weapon; **First Person** — the first-person camera without
+  a scope, with a scope, and with each scope its own (`FirstPersonScopeAttachmentData`, as the game's Mk II weapons
+  have it); and the whole `CWeaponInfo` as XML.
+- **The weapon with its attachments** — *View* on the General page, *View on Weapon* on the Components page (the
+  components selected there put on), or any `w_…` model opened from the Content Browser: a *Components* list beside
+  the 3D view, one per attach point, puts clips, scopes, suppressors, flashlights and finishes on. A part streamed by
+  another resource of the same folder is found. *Copy Lua* gives the line that gives you the weapon so.
+- **Sockets** — the same view's second page: the attach points (the `WAP…` bones) picked in the view or the list,
+  moved and turned with the handle (W / R) or typed in cm / °, undo. *Save Sockets* writes the model, its `_hi`
+  model and the skins' copies of it (with backups) — no Blender. *Keep Where They Are* moves a socket while the
+  attachments you tick stay where they are; *Move the Model on Its Socket* (Components page) moves an attachment's
+  own model instead — an iron sight that sits too far forward, without moving every sight on that socket.
 - **Skins** (*Components → Add Skin…*, or *Add Weapon ▾ → Skin for a Game Weapon…*) — a finish made the way the
   game makes its own, like the Pistol .50's Platinum Pearl Deluxe: while it is on, the weapon and, as you tick them,
   its clips, suppressors, flashlights and scopes show copies of their models with textures of their own. No polygons
@@ -373,11 +425,16 @@ Three tools, each a tab of its own under *Tools*:
   - **Every texture its own choice** — the skin's picture, a file of yours (a clip can have its own even when it
     shares the gun's texture name), or unchanged. A 3D preview of the weapon and of each part, the texture laid flat
     with its UV lines, and *Save UV Layout…* to paint one of your own.
+  - **Your own model** — each model of the skin has a *Model* button: a copy of the weapon's model (the usual way),
+    or a `.ydr` of your own for the skin's body or one of its attachments, with its texture dictionary — when a skin
+    is to look different from the weapon in shape, not only in colour.
   - **Edit Skin…** opens a skin as it is: its textures shown and kept unless you change one, with the choices it was
     made with (kept in the resource's `.veditor` folder, which players never download).
-  - **Files** — each skin in `stream/skin01`, `skin02` …, the weapon's own files in `stream/default`. Ten skins go on
-    one attach point and more on further `gun_root` points (seen in game: from the 11th skin of a point on, the gun
-    changed but its clip and suppressor did not).
+  - **Files** — each skin in `stream/skin01`, `skin02` …, the weapon's own files in `stream/default`.
+  - **How many fit** — seen in game: an attach point shows 10 skins whole, the 11th and 12th on the body only (the
+    clip and suppressor stay the weapon's) and none after the 12th; from the 8th attach point of a weapon on, nothing
+    shows on the weapon in hand. Skins are laid out by these rules on `gun_root` points — a skin that is in a good
+    place is never moved — and the check and the weapon view say which skins are body only or not shown.
 - **One set of skins for several weapons** — weapons with the same model can wear the same skins: select components
   (Ctrl / Shift), *Copy* and *Paste* them on another weapon (Ctrl+C / Ctrl+V), or *Copy to Weapons…* for several at
   once. Nothing is copied on disk. vEditor tells you when a skin was made from another model, or when the weapon's
@@ -386,8 +443,9 @@ Three tools, each a tab of its own under *Tools*:
   The check marks what would go wrong in game: a component named like one of the game's (it changes every weapon
   that has it), a model named like one of the game's, two resources with the same weapon or component, a weapon with
   no animations, a template newer than the server's game build, files over FiveM's limits, textures the game cannot
-  load (see [Textures](#textures)), more than ten skins on one attach point, a component that another resource
-  defines (that resource has to start first).
+  load (see [Textures](#textures)), skins in places where the game does not show them whole, a component that
+  another resource defines (that resource has to start first). Component names are matched whatever their case, as
+  in game.
 - **Save** writes `fxmanifest.lua`, the metas (`weapons`, `weaponcomponents`, `weaponarchetypes`,
   `weaponanimations`, `pedpersonality`), `cl_weaponNames.lua`, the `stream` folder and an `INSTALL.md` with the
   hashes and entries for ox_inventory / qb-core / ESX, and a table of the skins with their files. What is replaced
@@ -395,7 +453,7 @@ Three tools, each a tab of its own under *Tools*:
   `/give_<resource> COMPONENT_…` gives you the skin's weapon with that skin on.
 - Not tried in game by vEditor itself: the layout follows the game's own DLC weapon files and the add-on weapon
   resources that run on FiveM servers. Skins made with it have been seen in game on one server (a Kriss Vector, a
-  Combat Pistol).
+  Combat Pistol, a Pistol .50 with 32 skins); sockets, moved models and the First Person page have not.
 
 ### Vehicle Tool
 
@@ -440,6 +498,30 @@ goes to `.veditor_backup` first).
 
 - Not tried in game by vEditor itself: the files were read back by vEditor and CodeWalker; the siren pieces, bones
   and livery mods are built like the game's own (police3, polgauntlet, buccaneer2 …).
+
+### Prop Tool
+
+*Tools → Prop Tool* (Ctrl+Shift+P) — models of your own made into props of the game.
+
+- **Bring in** `.obj` (with its `.mtl`), `.fbx`, `.gltf` / `.glb` — several at once; their pictures are found beside
+  them, in a `textures` folder, or inside the file.
+- **Sized and stood up for the game** — the file's units (or a good guess when a file states the wrong ones), up
+  axis, height in metres, turn and tilt, and what stands on the ground (its lowest point, its middle, or as in the
+  file). The game's own character stands beside the model in the view for scale.
+- **Looks and collision** — each material gets one of the game's shaders — solid, cut out where clear (leaves,
+  fences), see-through (glass) or glowing, or as the model says — with its colour, normal and specular pictures; a
+  two-sided material is drawn from both sides. The collision is a box around the prop, its own shape, or none, with
+  the game's material for it (metal, wood, concrete … guessed from the material's name). The draw distance starts
+  from what the game's own props have.
+- **Two ways to save** — the files only (`.ydr`, `.ytd` and a `.ytyp` for every prop), or a **resource ready to
+  `ensure`**: `/<pack> <prop>` shows a see-through copy where you look — *E* puts it there, the mouse wheel turns it,
+  *Page Up / Page Down* raise and lower it, *G* sets it on what is under it — and `/<pack>_delete` takes away the one
+  you look at. The server keeps the places in `placements.json` and every player sees the props near them. Only
+  players with the ace (`add_ace group.admin command.<pack> allow`) may place and take away props.
+- **A pack** keeps the props and their settings (`.vprops`) to open and change later.
+- Built through the CodeWalker installed on your computer (see [XML](#xml-as-codewalker-makes-it)). One level of
+  detail. Not tried in game by vEditor itself: CodeWalker's library reads every file it writes, and the script was
+  only run against stand-ins.
 
 ### Scaleform (GFx) viewer
 

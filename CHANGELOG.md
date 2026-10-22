@@ -3,6 +3,95 @@
 What is new in each version of vEditor. Downloads are on the [releases page](https://github.com/vEditor-cmyk/vEditor/releases);
 vEditor tells you when a newer version is out (*Help → Check for Updates* looks at once).
 
+## 1.3.0 — 2026-10-22
+
+A prop maker, the city's lights at night, navmesh made anew, weapon sockets, clothes moved between components and
+props — see the [README](README.md#tools).
+
+**New tools**
+
+- **Prop Tool** (*Tools → Prop Tool*, Ctrl+Shift+P) — your own models (`.obj`, `.fbx`, `.gltf` / `.glb`) made into
+  props of the game: sized to the game (its character stands beside the model for scale), stood upright, given the
+  game's shaders and a collision (a box or the mesh itself, with a material), and written as `.ydr` + `.ytd` +
+  `.ytyp` — or as a resource ready to `ensure`, with `/<pack>` to place a prop in game and `/<pack>_delete` to take
+  it away (admins). Built through the CodeWalker installed on your computer.
+- **Manifest (.ymf)** (*Tools → Manifest (.ymf)…*, right-click a resource, the World's *Map Files*, or double-click a
+  `.ymf`) — makes the `_manifest.ymf` an MLO needs, from the resource's own ymaps, `.ytyp` files and collision: which
+  `.ytyp` each map needs, its interiors and their collision, ticked in a list before anything is written. The file
+  is the same, byte for byte, as CodeWalker makes from the same XML. A resource of copied game ymaps needs none, and
+  is told so (*Take the .ymf Out*).
+- **Code editor** — `.lua`, `.meta`, `.xml`, `.json`, `server.cfg` and other text files open in a tab of their own
+  (double-click in the Content Browser, or *Open as Text*), coloured as in VS Code: folding, find and replace (with
+  regular expressions), comment out (Ctrl+/), copy and move lines, matching brackets and tags, *Ctrl+S* to save —
+  the file's encoding and line endings kept, a copy of it as it was in the resource's `.veditor_backup` the first
+  time. *Edit Code (XML)* and the Weapon Tool's XML page use the same editor.
+
+**World**
+
+- **Night lights** — *💡 Lights*: the city as it is lit at night — windows and signs that glow, street lamps
+  lighting what is around them, the far lights of buildings — each at the hours the game switches it on (with
+  *☀ Timecycle*, the hour on the timeline). Click a light to see which object it belongs to; *Delete Light* takes it
+  out.
+- **Remove from Game…** — a building or an interior of the game's map taken out, with its far (LOD) models, the
+  parts named after it and its lights. Undo works; *Save Removals* writes the changed files into a resource of their
+  own, `veditor_removed` (add `ensure veditor_removed` to `server.cfg`). Not done yet: the building's collision
+  stays, and a far model it shares with other buildings still shows it from afar.
+- **Collision as the game has it** — where a DLC pack replaces an area of the base map, the base map's collision
+  there is left out, as in game; before, both were shown and picked.
+
+**Traffic paths and navmesh**
+
+- **🧱 Rebuild Navmesh** (*🛣 Paths*, key 4) — drag a box over ground the game's navmesh does not fit (a map of
+  your own, where buildings were taken away and the ground laid flat): the navmesh in it is made anew from the
+  collision there, joined to the navmesh around it, and saved with the paths. Seen in game: a script's pet that
+  stopped at the edge of such a plaza walked onto it after the rebuild.
+- **The walkways brush paints the ground** — not a treetop or a roof under the pointer — and leaves alone polygons
+  that float above the ground (the game's navmesh was made for its own map), saying how many.
+
+**Weapon Tool**
+
+- **The weapon with its attachments** — *View* on the General page, *View on Weapon* on the Components page, or any
+  `w_…` model opened: a *Components* list beside the 3D view, one per attach point, puts clips, scopes, suppressors
+  and finishes on. *Copy Lua* gives the line that gives you the weapon so.
+- **Sockets** — the attach points (the `WAP…` bones) moved and turned with the handle or typed in cm / °; *Save
+  Sockets* writes the model and the skins' copies of it — no Blender. *Keep Where They Are* moves a socket while the
+  attachments on it stay put; *Move the Model on Its Socket* moves an attachment's own model instead (an iron sight
+  that sits too far forward).
+- **First Person** page — the first-person camera without a scope, with a scope, and with each scope its own
+  (`FirstPersonScopeAttachmentData`, as the game's Mk II weapons have it).
+- **Your own model in a skin** — Add / Edit Skin: each model has a *Model* button — a copy of the weapon's model, as
+  before, or a `.ydr` of your own for the skin's body or one of its attachments, with its texture dictionary.
+- **How many skins fit, as seen in game** — an attach point shows 10 skins whole, the 11th and 12th on the body only
+  and none after the 12th; from the 8th attach point on, nothing shows on the weapon in hand. Skins are laid out by
+  these rules (a skin that is in a good place is never moved), and the check and the weapon view say which skins
+  are body only or not shown.
+- Component names are matched whatever their case, as in game (no more false "no such component"); a component's
+  model streamed by another resource of the same folder is found.
+- The Weapon Tool's windows keep their size, splitters and column widths.
+
+**Cloth Tool**
+
+- **Change Type moves the model** — a component made a prop (horns made as an accessory, turned into a hat) or
+  back: the model is put onto the bone the new type hangs from and given the shaders the game draws that type
+  with; see-through and cut-out parts stay so. *Fit Model to the Hat* for props changed the old way. Seen in game:
+  a converted hat shows on the head.
+- **Copy / Move to the other character** — an item copied or moved from the female character to the male one (or
+  back) with its textures and settings, into that character's collection of the pack (made if there is none).
+- **Male blue, female pink** — in the item list, the packs, the number map and the tattoos.
+- **The same model twice?** — adding models (your files, the game's clothes, copies) tells you when one is already
+  in the pack (the same shape) or in another pack (the very same file), with its number in game: add it anyway,
+  skip those, or cancel.
+- The preview moves the parts of clothes whose files carry bones of their own made by other tools (a top's leg
+  tape that stayed behind when the legs moved).
+
+**Fixes**
+
+- A `.ydd` opened from the Content Browser shows the drawable its list names.
+- The "Overwrite?" question of an import comes up over the progress window, not behind it.
+
+Not tried in game by vEditor itself: the Prop Tool, the manifest, removals and lights, sockets and the First Person
+page, copies to the other character — what they write was read back by CodeWalker's library.
+
 ## 1.2.0 — 2026-10-17
 
 Weapon skins — see the [README](README.md#weapon-tool) and the [video](README.md#showcase).
