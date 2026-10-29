@@ -3,6 +3,129 @@
 What is new in each version of vEditor. Downloads are on the [releases page](https://github.com/vEditor-cmyk/vEditor/releases);
 vEditor tells you when a newer version is out (*Help → Check for Updates* looks at once).
 
+## 1.4.0 — 2026-10-29
+
+Interiors of your own drawn where they stand on the map, seats for sit scripts, pictures of clothes, a larger
+Vehicle Tool, collision and materials for models — see the [README](README.md#tools).
+
+**MLO Tools — interiors of your own** (*Tools → MLO Tools*, Ctrl+Shift+M — the World's 🏠 MLO mode, Shift+4)
+
+- **Draw an interior where it stands** — *🏠 MLO ▾ → New MLO…* and click the spot on the map. Rooms (a rectangle or
+  any outline, L shapes too), walls of any thickness, floors, ceilings and storeys, stairs, blocks, doors, windows,
+  doorways, lamps and props; materials painted on floors and walls, a part of a floor in another material. The gizmo
+  moves, turns and sizes whatever is picked (W / E / R), or the whole interior; undo and redo.
+- **A house of the game, opened up** — a door or window put in the wall of a house of the game's map cuts the house's
+  model and collision; *Cut Hole* and *Delete Faces* take away what is in the way. The models and collision it
+  touches are taken into the resource by themselves; the game's own files are never changed.
+- **Doors and windows in three parts** — the hole, the frame and the door (or the panes), each with its own size;
+  18 of the game's doors, or doors made to fit.
+- **Presets** — doors, windows, lamps and materials, dragged from the Presets panel into the view. The materials
+  were made anew for this version: photo-real wood, tiles, stone, brick, concrete, plaster and metal at their real
+  sizes, laid to repeat without seams (made with OpenAI's picture model, then evened out and tiled by vEditor).
+- **Build** (Ctrl+B) writes a FiveM resource ready to `ensure`, through the CodeWalker installed on your computer:
+  the interior's `.ytyp` with its rooms and portals, its models, textures and collision, the ymap that places it and
+  its `_manifest.ymf`. The *Problems* list says what would go wrong in game before you build.
+- **Seen in game** on one server — an interior built inside a house of the game — and fixed from what was seen
+  there: the map's occlusion boxes over the house hid the interior seen through a doorway (the build switches them
+  off); the house's collision inside a room stopped the player (the build clears the map's collision inside the
+  rooms); a portal of an L-shaped room faced the wrong way; from outside, the inside did not show through a window,
+  and a shut door's frame was missing (this last fix not yet seen in game).
+- Not done yet: a navmesh inside (pedestrians do not walk in), entity sets, mirrors; house models must be `.ydr`.
+
+**New tools**
+
+- **Interact Object** (*Tools → Interact Object*) — a bench, a chair or a sofa and its seats, for a sit script: one
+  seat or a row (left, middle, right), the character placed on each with the handle, animations dropped onto each
+  seat — one animation can have its own offset (a couch's and a chair's animations sit at different heights).
+  *View Config…* gives the Lua table of models, offsets and animations, with an example script.
+- **Cloth Capture** (*Tools → Cloth Capture*, or right-click items in the Cloth Tool → *Add to Cloth Capture*) —
+  clothing items as pictures (PNG / WebP / JPG), GIFs, animated WebP or video: the item alone or on the character
+  with an outfit you choose, one or a whole queue, named by their number in game (as fivem-greenscreener names them,
+  or a name of your own). *Hide Bare Skin* leaves out the skin painted into an item (the legs under shorts); *Skip
+  Files That Are There* carries on after a capture was cut short.
+
+**Vehicle Tool**
+
+- **New pages** — *Vehicle* (names and their text in game, engine sound, class, type, layout, flags, wheels),
+  *Handling* (every value, grouped, with the game's beside it; flags as named boxes), *Colors* (the colour
+  combinations, plates, lights) and *Optimize* (textures compressed, capped and put on the 4-pixel grid — one vehicle
+  went from 304 to 47 MiB of graphics memory).
+- **The pages are in the Details panel** — folds that open and close (several at once); each can open in a window
+  of its own.
+- **Tools ▾** — *Check All Vehicles…* (every vehicle of the server: kit and siren numbers that clash, missing files
+  and names, textures — saved as a CSV), *New Vehicle from Game…*, *Rename Vehicle…* (its files, handling, game name
+  and mod parts), *Make the Game Probe…* / *Load Probe Results…* (a resource that spawns vehicles in game and reports
+  what the game has for them).
+- **Engine sound** — *Vehicle → Engine Sound → Import…*: a ready-made sound pack (a folder, `.zip` or `dlc.rpf`) put
+  in as a resource of its own or into the vehicle's, and given to the vehicle. Sounds are not made from `.wav` /
+  `.mp3`.
+- A kit number another vehicle uses has a *New Id* button; a livery mod made from a `_sign_` texture is named
+  *Livery N* in the shop.
+
+**Attach Prop**
+
+- **Props of your resources and mods** — the search looks in the game, the server's resources folders and the
+  game's `mods` folder (loose files and `.rpf` archives) — *Look in: Game / Resources / Mods* — and each row says
+  where the model is. Models of a bought resource that FiveM's asset escrow locked are listed greyed with a 🔒: only
+  FiveM can open them.
+- **Local / World** — the handle's arrows and rings along the prop's own axes, or the scene's.
+- **W / E** — move / rotate with the handle (it comes back if it was off).
+- **Undo and redo** — Ctrl+Z / Ctrl+Y (and *Edit → Undo / Redo*): attaching and removing props, the handle, typed
+  numbers, the bone, the rotation order, *Paste Numbers*.
+
+**Models**
+
+- **Collision** — *Collision: Hidden / Over the Model / Only Collision*: a model's collision, seen through it. *Edit
+  Collision…* makes one for a `.ydr`: a box, a box per piece, its own shape or boxes of your own, with the game's
+  material; moved, turned and sized with the handle, Alt+drag copies a box. *Save Collision* writes it into the model
+  and names it in the resource's `.ytyp` (`physicsDictionary`).
+- **🎨 Materials…** — every value of each shader (`specularIntensityMult`, `bumpiness` …) by the name and range the
+  game's shader files give it, changed live in the view and saved into the model in place.
+- **☀ Daylight…** — an interior's piece placed outside is black by day and fine at night (seen in game): its vertex
+  colours are given daylight (*As at Night*, or *Brighter*).
+
+**World**
+
+- **Open** on the Details' *Placed by* and *Defined in* rows — the resource's map opened with the object picked, its
+  `.ytyp`, or a copy of the game's file; for an interior, *Edit Interior*.
+- **Prop Capture…** (*Tools*, or the Props list's *Pictures* button) — pictures of props from their front (PNG / JPG /
+  WebP), the game's or the resources', some or all, into a folder of yours. The Props list shows them as
+  **Thumbnails**, and takes one when you point at a prop that has none.
+- **Flags as named boxes** — an object's flags field has a box per bit (*Bits*).
+- **Props newer than your build** are orange in the 3D view, the Outliner, the Content Browser and the brush list.
+- **Add to Folder…** on the Props list — props copied into a resource (model, textures, animations, archetype):
+  props newer than your server's build, or a prop of another resource. A copy of a prop the game has is named
+  `<folder>_<name>`: a copy under the game's own name made placed props show only now and then (seen in game).
+  *Remove from …* (with the resource's name) takes them out again.
+- **Make a Model of This Size…** for a map's prop placed with a scale — the game shrinks how such a prop looks, not
+  its collision (seen in game): a copy of the model at that size, collision too, as a new file or over the
+  resource's own model.
+
+**Elsewhere**
+
+- **Tabs in the Content Browser and the Props list** — like a web browser's: each keeps its folder, search, filters
+  and pick; *+*, *Open in New Tab*, middle-click.
+- **Normal maps in the Image Editor** — *Filter → 3D → Generate Normal Map…* makes one from a texture the way the
+  game's are made (green down, blue white) and saves it into the same `.ytd` (`<name>_n`); *Flip Green* turns a map
+  made for Blender or Unity.
+- **AI pictures in the texture's shape** — a 1024 × 512 texture is asked for at 2 : 1 (OpenAI's gpt-image), or at
+  the nearest shape the model makes (Gemini), not squeezed into a square.
+- **Scene Props** in the Animation Library — a chair, a sofa or a table (the game's, or a model file) set down around
+  the character with its collision, to pose and play an animation against.
+- **The mouse wheel scrolls panels** — it no longer changes a list or a number box the pointer passes over (a number
+  box or slider takes it once clicked into). *Settings → Mouse Wheel Changes Values* brings the old way back.
+
+**Fixes**
+
+- 1.3.0 did not start when a World tab had been left in Paths mode.
+- The Weapon Tool's *Save* and the Vehicle Tool's Mods page (*Add New* livery) could close the program now and then.
+- After a Build or *Reload Map* of a resource the World leaves out, far models no longer stand in for the map for a
+  few seconds.
+- A `.meta` with `--` in a comment is read (a vehicle was missing from the list); saving keeps a file's line ends.
+
+Not tried in game by vEditor itself, except where it says *seen in game*: what the new tools write was read back by
+CodeWalker's library.
+
 ## 1.3.0 — 2026-10-22
 
 A prop maker, the city's lights at night, navmesh made anew, weapon sockets, clothes moved between components and
