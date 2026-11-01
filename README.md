@@ -1,8 +1,8 @@
 # vEditor
 
 **One window for GTA V / FiveM assets** — textures, models, props of your own, the map and its traffic paths,
-interiors (MLOs) of your own, timecycles, animations, clothing, tattoos, weapons and vehicles — reading the game's
-own files directly, with no extracting first.
+interiors (MLOs) of your own, the colours of the radar and the pause map, timecycles, animations, clothing,
+tattoos, weapons and vehicles — reading the game's own files directly, with no extracting first.
 
 **[⬇ Download the latest version](https://github.com/vEditor-cmyk/vEditor/releases/latest)** — Windows, free ·
 [what is new](CHANGELOG.md) · [how to install](#download-and-install)
@@ -359,6 +359,14 @@ where it stands on the map and built as a FiveM resource.
   storey), *Lamp*, *Paint* (a material on a surface — drag on a floor for a part of it in another material) and
   *Prop*. A room starts on the floor under the mouse; double-click a room's edge for a new corner (L shapes);
   PgUp / PgDn change the storey.
+- **Build as in The Sims** — walls on a grid, dragged cell by cell, at 45° and on curves, full, half or knee high;
+  each cell a piece to push in or out and paint; rooms follow their walls. Floors painted a cell at a time; stairs
+  (straight, L, U, spiral, with railings), roofs, fences, columns, window shutters, platforms and basements; the
+  whole house on a foundation. Dragging is real-time.
+- **The ground and water around it** — ground brushes as in Unreal Engine 5 (*Sculpt*, *Smooth*, *Flatten*, *Ramp*,
+  *Paint* with the game's ground textures or the material library), the game's grass shown or taken away (*No
+  Grass*), pools with a ladder, ponds and waterfalls (swimming seen in game), and rivers (a clicked line, the
+  channel dug, the water flowing; not yet seen in game).
 - **Change** — click anything to pick it; the gizmo moves, turns and sizes it (W / E / R), *🏠 Whole MLO* the whole
   interior, *End* puts it down on the floor. The Details panel lists what is placed, and the form of what is picked
   (sizes, materials, a door's kind …). Undo and redo; Ctrl+D copies.
@@ -407,6 +415,29 @@ In game — FiveM, game build 2612 — one street from morning to night:
 | Early morning | Morning | Midday | Afternoon |
 | ![Late afternoon](showcase/images/timecycle/5.png) | ![Sunset](showcase/images/timecycle/6.png) | ![Dusk](showcase/images/timecycle/7.png) | ![Night](showcase/images/timecycle/8.png) |
 | Late afternoon | Sunset | Dusk | Night |
+
+### Map Colours
+
+*Tools → Map Colours* — the map of the radar and the pause map in colours of your own, built as a FiveM resource.
+
+- **Colours** — land, city blocks, main and minor roads, tunnels, railway, the water's depth bands and the open sea;
+  click the map to find what a colour is. Presets: the game's colours, a few of vEditor's, and every Tailwind CSS
+  palette, dark or light. Colours are saved as a `.json` (Ctrl+S; the tab shows * until saved).
+- **Hillshade** — the land shaded from the heights of the world's own ground (read once from the game's collision)
+  or from the game's heightmap: flat tones like a printed atlas, or smooth; one or two lights, how strong, how many
+  tones, how thick the shadows are.
+- **Zones** — draw an area (the city, a beach, a desert) and give it a colour, with or without the hillshade; the
+  land between the city's blocks can be *city ground* of its own colour.
+- **Under bridges** — how strong the game's shade under bridges is; *Sharp* (no fade streaks); *No shade if
+  shorter* (pieces under bridges drawn as road, long tunnels kept).
+- **Zoomed far out** — the pause map and the radar show pictures when zoomed far out; *Build* draws them anew from
+  the map (zones and hillshade too), at the game's size or up to 2048 px.
+- **Cayo Perico and Fort Zancudo** in the same colours; *Build* can add a client script that shows the military
+  base (hidden by the game on a FiveM server) and Cayo Perico's map.
+- **Build** writes a resource ready to `ensure` (it must start after any other resource that streams the map's
+  files); **Export PNG** saves the whole map as one picture — 1080p, 2K, 4K or 8K.
+- Hillshade, zones and the base/island script go through the CodeWalker installed on your computer. Seen in game:
+  the colours, zones and hillshade zoomed in.
 
 ### Animations
 
@@ -668,8 +699,9 @@ replaced goes to `.veditor_backup` first).
 - **Pictures in the texture's shape** — a texture that is not square (1024 × 512) is asked for in its own shape
   (OpenAI's gpt-image 2 and later), or the nearest shape the model makes (Gemini), and the answer is cut back to the
   texture's size — not squeezed into a square.
-- Not yet tried with real keys: the routes to OpenAI, Gemini, Meshy and Uthana are written from those services'
-  documentation and tested against stand-ins only. Claude through Claude Code is the route the sample videos use.
+- Tried with real keys: Claude through Claude Code (the route the sample videos use) and Meshy (its motions come
+  as an SMPL-H skeleton, put on the character). The routes to OpenAI, Gemini and Uthana are written from those
+  services' documentation and tested against stand-ins only.
 
 ## Download and install
 

@@ -3,6 +3,61 @@
 What is new in each version of vEditor. Downloads are on the [releases page](https://github.com/vEditor-cmyk/vEditor/releases);
 vEditor tells you when a newer version is out (*Help → Check for Updates* looks at once).
 
+## 1.5.0 — 2026-11-01
+
+The map of the radar and the pause map in colours of your own, houses built on a grid as in The Sims, and the
+ground, grass, pools, ponds, waterfalls and rivers around an interior — see the [README](README.md#tools).
+
+**Map Colours — the radar and the pause map** (*Tools → Map Colours*)
+
+- **Every colour of the map** — land, city blocks, main and minor roads, tunnels, railway, the water's depth bands
+  and the open sea; click the map to find what a colour is. Presets: the game's colours, a few of vEditor's, and
+  every Tailwind CSS palette, dark or light.
+- **Hillshade** — the land shaded from the heights of the world's own ground (read from the game's collision) or
+  from the game's heightmap: flat tones like a printed atlas, or smooth; one or two lights, how strong, how many
+  tones, how thick the shadows are.
+- **Zones** — areas you draw (the city, a beach, a desert) in colours of their own, each with or without the
+  hillshade; the land between the city's blocks as *city ground*.
+- **Under bridges** — the game shades a road where it passes under another. How strong the shade is; *Sharp* (one
+  colour each side instead of the fade's streaks); *No shade if shorter* (short pieces under bridges drawn as road,
+  long tunnels kept).
+- **Zoomed far out** — the pictures the pause map and the radar show zoomed out are drawn anew from the map, with
+  the zones and the hillshade, at the game's size or up to 2048 px (twice as sharp on the pause map).
+- **Cayo Perico and Fort Zancudo** — their maps in the same colours. *Build* can add a client script that shows
+  the military base (the game keeps it hidden on a FiveM server) and Cayo Perico's map, near the island or always.
+- **Build** writes a resource ready to `ensure` (a progress bar, a message when it is done); **Export PNG** makes
+  the whole map one picture, 1080p, 2K, 4K or 8K; **Ctrl+S** saves the colours (the tab shows * until saved).
+- Seen in game on one server: the colours, the zones and the hillshade, zoomed in. Not yet seen in game: the
+  pictures drawn anew for the far zoom, *Sharp* and *No shade if shorter*, the base and island script.
+
+**MLO Tools — building as in The Sims**
+
+- **Walls on a grid** — drag walls cell by cell, at 45° and on curves, full, half or knee high. Each cell is a
+  piece: push it in or out, paint it, pick a whole row; rooms follow their walls. Floors painted a cell at a time.
+- **Stairs** — straight, L, U and spiral, with railings; the floor above is cut open for them.
+- **Roofs** (gable, hip, shed, flat), **fences**, **columns**, **window shutters**, **platforms** and
+  **basements** (PgDn below the ground floor). *Ground floor at* lifts the whole house onto a foundation.
+- **Materials** — the doors' leaves and six roof materials photo-real; a material of your own from a file or made
+  with AI, repeating without a seam, with its normal map.
+- **The outside** — fences, roofs and lamps outside the house are always built; *Outside walls* turns off only the
+  house's own outside.
+- Dragging is real-time (no rebuild until you let go), and *Build* no longer holds up the window.
+
+**MLO Tools — the ground and water around it**
+
+- **Ground brushes** as in Unreal Engine 5 — *Sculpt* (click raises, Shift lowers), *Smooth*, *Flatten*, *Ramp*,
+  and *Paint* the game's ground with its own textures or the material library.
+- **Grass** — the game's grass shown in the view; *No Grass* takes it away where you paint.
+- **Pools** — the basin, a ladder, the water's colour. Swimming seen in game.
+- **Ponds** (a circle or an outline, dug into the ground) and **waterfalls** (how see-through, colour, foam, flow,
+  mist and splash). Seen in game.
+- **Rivers** — click a line: the channel is dug and the water flows along it. Not yet seen in game.
+
+**Animations**
+
+- Meshy's motions (an SMPL-H skeleton) are put on the character with the right arms (its *L_Shoulder* is the upper
+  arm) — tried with a real Meshy key.
+
 ## 1.4.0 — 2026-10-29
 
 Interiors of your own drawn where they stand on the map, seats for sit scripts, pictures of clothes, a larger
