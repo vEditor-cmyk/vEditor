@@ -3,6 +3,74 @@
 What is new in each version of vEditor. Downloads are on the [releases page](https://github.com/vEditor-cmyk/vEditor/releases);
 vEditor tells you when a newer version is out (*Help → Check for Updates* looks at once).
 
+## 2.0.0 — 2026-11-17
+
+A new vEditor: the same tools in a new interface — cleaner, quicker to start, with a smoother World — plus whole
+animations made by AI on your own graphics card, a 3D Editor for the game's models, and more for MLOs. See the
+[README](README.md#tools).
+
+**The new interface**
+
+- **Rebuilt as a modern desktop app** — a new window and a new look (dark, light or as Windows is set: *View →
+  Theme*) over the same engine that reads and writes the game's files.
+- **Quick to start** — the World no longer loads by itself: open it from the Start page or *Tools → World* when you
+  need it; every other tool is ready at once.
+- **Tabs** — every file and tool in a tab of its own; the Content Browser along the bottom with browser-like tabs
+  of its own (files and props), kept for next time.
+- **A real code editor** — XML, Lua and meta files in the editor VS Code uses: find and replace, folding, and the
+  line CodeWalker complains about marked.
+- **Drop files from Explorer** onto vEditor to open them.
+- Your settings stay: the game folder, the server's folders, API keys and caches of 1.x are used as they are.
+
+**AI motion — NVIDIA Kimodo, on your own computer**
+
+- Describe a motion in a sentence — or several in a row — and Kimodo makes the whole animation on your graphics
+  card: no account, no key, nothing to pay. Variations to choose from; it can start from the pose of the animation
+  you are editing, move through its keyed poses and follow its path. *Use This* adds it to the dictionary, ready to
+  edit. Install it from *File → AI Models…* (about 21 GB).
+
+**3D Editor (new — a first version)**
+
+- Edit a `.ydr` or `.yft` the way Blender edits a mesh: vertices, edges and faces; move, turn, size, extrude, fill,
+  delete and duplicate; add planes, cubes and cylinders; the model's own materials; undo. Its collision (`.ybn`)
+  can be edited beside it. Open it from a file, from the Content Browser, or from a house of the game in MLO Tools —
+  the changes then go into the MLO's own copy of the house. For now the detailed model only: its far (LOD) models
+  keep their old shape.
+
+**MLO Tools**
+
+- **Tunnels and shafts** — tunnels drawn as a path (round, arched, box or horseshoe), shafts up to a manhole with a
+  ladder to climb, chambers where they meet, water running along a channel.
+- **Decals, pipes and steel** — stains, cracks, dirt and signs on any surface; pipes, ducts, conduit and cable
+  trays with bends and fixings; ceiling grids, I-beams and trusses.
+- **Secret doors** — a panel of any wall that slides open.
+- **Points** — drag the corners and edges of a house of the game; doors **fit to the house's doorway** without
+  being stretched.
+- **Easier editing** — click a corner dot for its gizmo, copy a room beside another or to the storey above.
+
+**Animations**
+
+- The library also lists the `.ycd` files of your server's resources and of the game's mods folder.
+- **Characters** — more characters in the scene, each playing its own animation in step, standing free or carried
+  on a bone of the first; *Copy Lua* writes the lines for both.
+- **Upper body (flag 49)** — *Auto* plays an animation the way `TaskPlayAnim` flag 49 does and says which flag your
+  script needs.
+- **Motion from a Video**, **Blend** and **walk styles** — a phone clip of a person made into an animation; two
+  animations mixed by body part; walk styles of your own.
+
+**Vehicle Tool**
+
+- **Plates** — take a plate off, put the game's plate on, add a front or rear plate, move and turn it.
+
+**Left out for now**
+
+- The **Particle Tool** is not in this version.
+
+**The download**
+
+- The zip now holds `vEditor.exe` and a `veditor-api` folder — keep them together. The interface is shown by
+  Microsoft Edge WebView2, which is part of Windows 11 (Windows 10 has it with Edge).
+
 ## 1.5.0 — 2026-11-01
 
 The map of the radar and the pause map in colours of your own, houses built on a grid as in The Sims, and the
