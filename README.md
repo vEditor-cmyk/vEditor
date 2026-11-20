@@ -85,8 +85,8 @@ I will keep adding tools as far as I can.
 ### Textures
 
 - **Texture dictionaries and embedded textures** (`.ytd`, `.ydr`, `.yft`) — size, format and mip levels of every
-  texture, a preview, Import, Replace, Export (PNG or DDS), Delete. Imports PNG, JPG, WebP, BMP, TGA, GIF, TIFF and
-  DDS.
+  texture, a preview, Import, Replace, Rename, Export (PNG or DDS), Delete. Pick many the way Explorer does and
+  right-click for the menu. Imports PNG, JPG, WebP, BMP, TGA, GIF, TIFF and DDS.
 - **Optimize** — DXT1 / DXT3 / DXT5 (or let vEditor choose), mip levels, power-of-two sizes, downscaling — one
   texture or many at once, transparency kept right.
 - **Really smaller files** — a model saved after its textures shrink gets smaller too, and so does the memory the
@@ -199,7 +199,7 @@ a FiveM resource.
 - **🚇 Tunnels and 🪜 shafts** — tunnels drawn as a path, shafts up to a manhole with a ladder to climb, chambers
   where they meet.
 - **Doors and windows** — 18 of the game's doors or doors made to fit, windows with or without glass; frame on,
-  off, or none at all. **Fit to the Building's Doorway** sizes a door to the doorway of the house around it —
+  off, or none at all; a window's frame and glass in materials of their own. **Fit to the Building's Doorway** sizes a door to the doorway of the house around it —
   without stretching it.
 - **A house of the game, opened up** — cut doors, windows and holes through a building of the map, delete faces,
   and drag its corners with **⬚ Points**; the game's files are never changed.
@@ -258,6 +258,7 @@ Four tools under *Tools*: **Animation Library**, **Animation Capture**, **Attach
 
 - **Every animation** — the game's (about 20,000 dictionaries), your server's resources, the `mods` folder and
   your own `.ycd` files, played on any of the game's characters; names exactly as `TaskPlayAnim` takes them.
+  Search finds dictionaries and the animations inside them by name.
 - **Upper body (flag 49)** — see an animation as `TaskPlayAnim` flag 49 plays it; *Auto* tells you which flag an
   animation needs.
 - **Edit** — pose bones with the handle, keys on a timeline, many keys edited at once, mirror left ↔ right, thin
@@ -294,16 +295,18 @@ give each seat its animations, and copy the finished Lua config with an example 
 
 - **Your clothing packs as the game sees them** — in `server.cfg` order, with **the number every item has in
   game**; checks against the game's limits, VRAM estimates, FiveM's size warnings.
-- **Edit Mode** — new packs, add models (your files or **any of the game's clothes**), delete, reorder, move between
-  packs, copy or move items to the other character.
+- **Edit Mode** — new packs, add models (your files or **any of the game's clothes**) to the male, the female or
+  both characters, delete, reorder, move between packs, copy or move items to the other character.
 - **Per item** — type, flags, audio, first-person model, physics, shop settings; **Change Type** (a prop into a hat,
   a component into a prop) moves the model to the right bone.
-- **Duplicate check** — tells you when a model is already in a pack.
-- **Textures** — import, replace, export and optimize, previewed on the whole character with an outfit.
+- **Duplicate check** — tells you when a model is already in a pack, listed by pack with each item's number in game.
+- **Textures** — import, replace, rename, export and optimize — many at once, with a right-click menu — previewed
+  on the whole character with an outfit.
 - **UV page with AI** — the item's texture made on its UV layout.
 - **Tattoos** — from a picture or drawn by AI, placed on the body in 3D.
 - **Cloth Capture** — pictures, GIFs or videos of clothing items, alone or worn, one or a whole pack, named by
-  their number in game (as fivem-greenscreener names them).
+  their number in game (as fivem-greenscreener names them); saved looks and camera angles, anti-aliasing up to
+  Ultra.
 
 [![Cloth Tool in use](showcase/previews/cloth-tool.webp)](showcase/videos/cloth-tool.mp4)
 <sub>The Cloth Tool: the demo server's clothing pack, a varsity jacket's Details, then Preview on Character — turned round, another texture, walking.</sub>

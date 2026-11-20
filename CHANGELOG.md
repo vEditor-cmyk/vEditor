@@ -3,6 +3,59 @@
 What is new in each version of vEditor. Downloads are on the [releases page](https://github.com/vEditor-cmyk/vEditor/releases);
 vEditor tells you when a newer version is out (*Help → Check for Updates* looks at once).
 
+## 2.0.1 — 2026-11-20
+
+More for clothing packs and texture dictionaries, the Optimize window back in full, and Cloth Capture's looks and
+camera angles back.
+
+**Texture dictionaries (`.ytd` tabs)**
+
+- **Pick many textures** the way Explorer does — click, Ctrl / Shift + click, drag a box, Ctrl+A — and **right-click**
+  for the menu: Import, Replace, Rename (F2), Export as PNG or DDS, Optimize, Edit in the Image Editor, Copy Names,
+  Show in Explorer, Delete (Del). The same in a bar over the list.
+- **Optimize several textures at once**; the file is written at once (the first copy kept in `.veditor_backup`, a
+  file inside an archive asked about first).
+
+**Optimize — the full window again**
+
+- *Optimization Options* is back as it was: the texture's preview, its current format, change / auto-select the
+  compression, mipmaps, power of two with its threshold, downscale by half or to a width and height (kept in
+  proportion, the current size beside it), a warning before transparency is lost, and a size for each texture when
+  several of different sizes are made smaller. The same window in texture dictionaries, the Cloth Tool and the
+  textures inside a model.
+
+**Cloth Tool**
+
+- **Add Models → Male, Female or Both** — one import into both characters' collections (a collection the pack lacks
+  is made, as *Copy to* does).
+- **Textures** — pick many (click, Ctrl / Shift, drag, Ctrl+A) with a right-click menu; each row shows the name of
+  the texture inside its file, its size and format; **Rename** gives that texture another name (the file keeps the
+  name the game needs). The textures inside the model have the same list and menu.
+- **Optimize, Replace, Add …** ask to turn Edit Mode on when it is off, instead of staying greyed out — also on the
+  UV page after a picture was made.
+- **"This model is there already"** is now a list by pack — the pack you are adding to first — each item with its
+  number in game and whether it is the same model or the very same file.
+- Fixed: after deleting some textures the others showed their old pictures until vEditor was restarted.
+- Fixed: *Replace* on the UV page could put the picture into the wrong letter when an earlier texture had no file;
+  a picture made by AI no longer gives way to texture *a* when the item is read again.
+
+**Cloth Capture**
+
+- **Look and Camera Angle are back** — shading (Wireframe, Solid, Material Preview, Rendered), character colour,
+  lighting, background, floor grid, skeleton and anti-aliasing (up to Ultra, in the pictures themselves), with the
+  built-in looks and camera angles and **your own saved ones** (★) — *Save Look…*, *Save Angle…*, *Delete*, FOV;
+  double-click the view to go back to the chosen angle. The ones saved in 1.x are there again.
+
+**Animations**
+
+- **Search finds animations by name**, not only dictionaries — in the Animation Library and in every animation
+  picker (Blend, Moveset, Characters, Cloth Capture).
+
+**MLO Tools**
+
+- A window's own frame, bars and board, and its glass, can each be given a material of their own (Paint, or *Made
+  of* / *Glass* in its Details).
+
 ## 2.0.0 — 2026-11-17
 
 A new vEditor: the same tools in a new interface — cleaner, quicker to start, with a smoother World — plus whole
