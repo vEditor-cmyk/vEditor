@@ -3,6 +3,41 @@
 What is new in each version of vEditor. Downloads are on the [releases page](https://github.com/vEditor-cmyk/vEditor/releases);
 vEditor tells you when a newer version is out (*Help → Check for Updates* looks at once).
 
+## 2.0.2 — 2026-11-22
+
+The Content Browser now works with files the way Explorer does, the Vehicle Tool picks a vehicle at once even in a
+very large pack, and vehicle names can be exported.
+
+**Content Browser**
+
+- **Delete, Copy, Cut and Paste** files and folders, many at once, on disk and inside archives. What is deleted from
+  a fixed drive, and a file that a paste writes over, goes to the Recycle Bin.
+- **Drag files and folders into another folder** — on the same drive or in the same archive they move, otherwise they
+  are copied; hold Ctrl to copy, Shift to move. A move can be undone from its notice.
+- **Rename in place** — F2 or right-click, in the row, the tile or the folder tree; open tabs follow. Names written
+  inside `fxmanifest.lua` or a `.ytyp` are not changed for you.
+- **Drag out to Explorer** (always a copy; files inside an archive are extracted first), and copy and paste between
+  vEditor and Explorer.
+- **Export Raw** — a file as it is inside an archive, as CodeWalker's *Extract Raw* gives it: a resource as a
+  standalone file, other files decrypted. One file, many, or whole folders.
+- The game's own files stay safe: its folder (all but `mods`) and the archives the game reads can be copied from,
+  never deleted, moved or changed.
+
+**Vehicle Tool**
+
+- **Picking a vehicle is far faster** — in a pack of 566 vehicles a click went from about 3 seconds to about 0.2, and
+  going back to a vehicle from 0.7 to 0.04. The row lights at once; what needs the model (Plates, Liveries, Sirens,
+  Optimize) fills in a moment later. Quick clicks through the list no longer queue up.
+- **Export Vehicle Names** (*Tools ▾* or right-click a vehicle) — every vehicle of the resource as Text, CSV, JSON or
+  a Lua table, with its model, name in game, label and make. Choose whether to include vehicles the resource only
+  changes.
+
+**Cloth Tool**
+
+- **View Files** on the note *"N files replace clothes of the game's own collections"* — the list of those files
+  with their type, character, collection, item and size. Search, filter, double-click to open, right-click to show
+  in Explorer or copy names and paths.
+
 ## 2.0.1 — 2026-11-20
 
 More for clothing packs and texture dictionaries, the Optimize window back in full, and Cloth Capture's looks and

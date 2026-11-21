@@ -57,8 +57,10 @@ I will keep adding tools as far as I can.
 - **Content Browser** — the GTA V folder, your server's `resources` folders and any folder you add, side by side;
   `.rpf` archives open like folders. Grid or List, a colour per file type, search through everything
   below a folder (archives included), filters by type.
-- **Work with files** — New Folder, Import, Rename, Delete and Export, on disk and inside archives; drop files in
-  from Explorer; right-click to make a new animation (`.ycd`) or texture dictionary (`.ytd`).
+- **Work with files as in Explorer** — New Folder, Import, Rename (F2), Delete, Copy, Cut, Paste and Export (also
+  **Export Raw**), many at once, on disk and inside archives; drag files and folders into another folder, in from
+  Explorer or out to it; deleted files go to the Recycle Bin; right-click to make a new animation (`.ycd`) or texture
+  dictionary (`.ytd`).
 - **Tabs** like a web browser's — each keeps its folder, search and selection, and they are there again next time.
 - **Reload Map** — right-click a resource to see its map as it is now, without loading the whole world again.
 - **RPF Explorer** (*Tools → RPF Explorer*) — open or create an `.rpf`, import and export files and folders, nested archives,
@@ -300,6 +302,8 @@ give each seat its animations, and copy the finished Lua config with an example 
 - **Per item** — type, flags, audio, first-person model, physics, shop settings; **Change Type** (a prop into a hat,
   a component into a prop) moves the model to the right bone.
 - **Duplicate check** — tells you when a model is already in a pack, listed by pack with each item's number in game.
+- **Replacing the game's clothes** — a pack that streams over the game's own collections lists those files: search,
+  filter by type or character, open any of them.
 - **Textures** — import, replace, rename, export and optimize — many at once, with a right-click menu — previewed
   on the whole character with an outfit.
 - **UV page with AI** — the item's texture made on its UV layout.
@@ -347,8 +351,8 @@ for every change, backups before saving.
   beside the game's, colour combinations.
 - **Optimize** — the vehicle's textures compressed and capped (one vehicle went from 304 to 47 MiB).
 - **Tools ▾** — *Check All Vehicles* (clashes, missing files, large textures — as a CSV), **New Vehicle from
-  Game** (a game vehicle as a new one, with its mod parts renamed too), *Rename Vehicle*, a probe that reads what
-  the game has for your vehicles.
+  Game** (a game vehicle as a new one, with its mod parts renamed too), *Rename Vehicle*, **Export Vehicle Names**
+  (Text, CSV, JSON or Lua), a probe that reads what the game has for your vehicles.
 
 [![Vehicle Tool in use](showcase/previews/vehicle-tool.webp)](showcase/videos/vehicle-tool.mp4)
 <sub>The Vehicle Tool: the demo server's police car — its overview, its sirens flashing in 3D, then its colours, handling and plates pages.</sub>
