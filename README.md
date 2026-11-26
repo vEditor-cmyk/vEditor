@@ -302,10 +302,12 @@ give each seat its animations, and copy the finished Lua config with an example 
 - **Per item** — type, flags, audio, first-person model, physics, shop settings; **Change Type** (a prop into a hat,
   a component into a prop) moves the model to the right bone.
 - **Duplicate check** — tells you when a model is already in a pack, listed by pack with each item's number in game.
-- **Replacing the game's clothes** — a pack that streams over the game's own collections lists those files: search,
-  filter by type or character, open any of them.
-- **Textures** — import, replace, rename, export and optimize — many at once, with a right-click menu — previewed
-  on the whole character with an outfit.
+- **Replacing the game's clothes** — the game's own items a pack streams over are listed with its own, numbered as
+  in game (also when the pack brings its own `mp_m_freemode_01.ymt` with more numbers), and its files can be listed
+  on their own: search, filter by type or character, open any of them.
+- **Textures** — import, replace, rename, export and optimize — many at once, with a right-click menu.
+- **Preview on Character** — the item worn with an outfit you set piece by piece (number and texture), standing or
+  walking; Prev / Next step through the list.
 - **UV page with AI** — the item's texture made on its UV layout.
 - **Tattoos** — from a picture or drawn by AI, placed on the body in 3D.
 - **Cloth Capture** — pictures, GIFs or videos of clothing items, alone or worn, one or a whole pack, named by

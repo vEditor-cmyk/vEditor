@@ -3,6 +3,36 @@
 What is new in each version of vEditor. Downloads are on the [releases page](https://github.com/vEditor-cmyk/vEditor/releases);
 vEditor tells you when a newer version is out (*Help → Check for Updates* looks at once).
 
+## 2.0.3 — 2026-11-26
+
+The Cloth Tool now lists every item of a pack, also the game's own ones it replaces, and the character preview can
+be dressed piece by piece.
+
+**Cloth Tool**
+
+- **The game's own items a pack replaces are listed with its own** — after the pack's items, one group per type
+  (*"Top · the game's own, replaced"*), each with the number it has in game and the collection it belongs to. A pack
+  that brings its own `mp_m_freemode_01.ymt` (or another of the game's) with more numbers shows all of them; the note
+  above the list tells how many each type has against the game's (for example *Top 16 → 127*). Before, only the
+  pack's own addon items were listed.
+- These items open in the Details and in the preview — where the pack has no file for a number or a texture, the
+  game's own is shown. They are shown, not edited: their numbers belong to the game.
+- The ♂ / ♀ counts beside a pack include these items (hover for added and replaced).
+- **Find Number** on one of the game's numbers goes to the pack that replaces it.
+- A pack's own props are no longer mixed up with files that replace the game's own props.
+- Opened before the game was read, the Cloth Tool now reads the packs again once it is, so replacing packs are not
+  missed.
+- In a folder of packs, packs that only replace the game's clothes are listed too.
+
+**Preview on Character**
+
+- **Outfit** — a panel beside the character: the number in game and the texture of every other piece (hair, legs,
+  shoes, hats …), *None* to take one off, *Take Off What Hides It*, *Plain Look*, *Take All Off*. It is the same
+  outfit Cloth Capture uses, and Cloth Capture's outfit has the texture field too.
+- **Prev / Next** — the item before or after in the list, on into the next type; the list and the Details follow.
+- **More** — the item's menu, as a right click on it in the list.
+- **Copy lines say the character** — *Male · Top 981*, *Male · Top 13 (pack)*, *Male · collection jbib 13*.
+
 ## 2.0.2 — 2026-11-22
 
 The Content Browser now works with files the way Explorer does, the Vehicle Tool picks a vehicle at once even in a
